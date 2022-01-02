@@ -55,6 +55,9 @@ class RaytraceRenderWidget : public QOpenGLWidget
 	
 	// destructor
 	~RaytraceRenderWidget();
+
+	// for starting raytrace from window
+	void invokeRt();
 			
 	protected:
 	// called when OpenGL context is set up

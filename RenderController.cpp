@@ -131,6 +131,11 @@ RenderController::RenderController
     QObject::connect(   renderWindow->scaleObjectBox,               SIGNAL(stateChanged(int)),
                         this,                                       SLOT(scaleObjectCheckChanged(int)));
 
+    // raytrace specific
+    // raytrace button
+    QObject::connect(   renderWindow->raytraceButton,               SIGNAL(clicked()),
+                        this,                                       SLOT(raytraceButtonPressed()));
+
     // copy the rotation matrix from the widgets to the model
     renderParameters->rotationMatrix = renderWindow->modelRotator->RotationMatrix();
     renderParameters->lightMatrix = renderWindow->lightRotator->RotationMatrix();
@@ -453,4 +458,12 @@ void RenderController::EndScaledDrag(float x, float y)
     // reset the interface
     renderWindow->ResetInterface();
     } // RenderController::EndScaledDrag()
+
+void RenderController::raytraceButtonPressed()
+{
+    // Start tracing
+    renderWindow->raytraceRenderWidget->invokeRt();
+    // Update the interface
+    renderWindow->ResetInterface();
+}
 

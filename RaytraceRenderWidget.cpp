@@ -51,6 +51,12 @@ RaytraceRenderWidget::~RaytraceRenderWidget()
     // and OpenGL cleanup is taken care of by Qt
     } // destructor                                                                 
 
+void RaytraceRenderWidget::invokeRt()
+{
+    // Call raytrace
+    Raytrace();
+}
+
 // called when OpenGL context is set up
 void RaytraceRenderWidget::initializeGL()
     { // RaytraceRenderWidget::initializeGL()
@@ -77,9 +83,24 @@ void RaytraceRenderWidget::paintGL()
     
     // routine that generates the image
 void RaytraceRenderWidget::Raytrace()
-    { // RaytraceRenderWidget::Raytrace()
-	// This is where you will invoke your raytracing
-    } // RaytraceRenderWidget::Raytrace()
+{ // RaytraceRenderWidget::Raytrace()
+    // Write gradient to image
+    for (size_t col = 0; col < frameBuffer.width; col++)
+    {
+        for (size_t row = 0; row < frameBuffer.height; row++)
+        {
+            auto r = double(col) / (frameBuffer.width - 1);
+            auto g = double(row) / (frameBuffer.height - 1);
+            auto b = 0.25f;
+
+            int rInt = static_cast<int>(255.999 * r);
+            int gInt = static_cast<int>(255.999 * g);
+            int bInt = static_cast<int>(255.999 * b);
+
+            frameBuffer[row][col] = RGBAValue(rInt, gInt, bInt, 1.0f);
+        }
+    }
+} // RaytraceRenderWidget::Raytrace()
     
 // mouse-handling
 void RaytraceRenderWidget::mousePressEvent(QMouseEvent *event)

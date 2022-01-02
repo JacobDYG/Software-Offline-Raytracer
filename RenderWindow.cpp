@@ -93,6 +93,10 @@ RenderWindow::RenderWindow
     emissiveLightLabel          = new QLabel                    ("                                    Emissive",            this);
     ambientLightLabel           = new QLabel                    ("Ambient                      Diffuse",            this);
     specularLightLabel          = new QLabel                    ("Specular                     Exponent",           this);
+
+    // raytrace specific
+    // start tracing button
+    raytraceButton              = new QPushButton               ("Raytrace",            this);
     
     // add all of the widgets to the grid               Row         Column      Row Span    Column Span
     
@@ -148,6 +152,10 @@ RenderWindow::RenderWindow
     // Exponent Row
     // label covers three columns
     windowLayout->addWidget(specularExponentSlider,     nStacked+3, 5,          1,          1           );
+
+    // raytrace specific
+    // raytrace button
+    windowLayout->addWidget(raytraceButton,             0,          6,          1,          1           );
 
     // now reset all of the control elements to match the render parameters passed in
     ResetInterface();

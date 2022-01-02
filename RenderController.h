@@ -95,6 +95,9 @@ class RenderController : public QObject
     void ContinueScaledDrag(float x, float y);
     void EndScaledDrag(float x, float y);
 
+    // raytrace slots
+    void raytraceButtonPressed();
+
     }; // class RenderController
 
 // end of include guard
