@@ -26,6 +26,7 @@
 // and include all of our own headers that we need
 #include "TexturedObject.h"
 #include "RenderParameters.h"
+#include "Raytracer.h"
 
 // class for a render widget with arcball linked to an external arcball widget
 class RaytraceRenderWidget : public QOpenGLWidget										
@@ -38,14 +39,17 @@ class RaytraceRenderWidget : public QOpenGLWidget
 	// the render parameters to use
 	RenderParameters *renderParameters;
 
+	// Raytrace context
+	Raytracer raytracer;
+
+	public:
 	// An image to use as a framebuffer
 	RGBAImage frameBuffer;
 
-	public:
 	// constructor
 	RaytraceRenderWidget
 			(
-	 		// the geometric object to show
+			// the geometric object to show
 			TexturedObject 		*newTexturedObject,
 			// the render parameters to use
 			RenderParameters 	*newRenderParameters,
@@ -67,8 +71,8 @@ class RaytraceRenderWidget : public QOpenGLWidget
 	// called every time the widget needs painting
 	void paintGL();
 	
-    // routine that generates the image
-    void Raytrace();
+	// routine that generates the image
+	void Raytrace();
 
 	// mouse-handling
 	virtual void mousePressEvent(QMouseEvent *event);

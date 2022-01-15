@@ -25,6 +25,15 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Raytracing">
+      <UniqueIdentifier>{50bee2f7-38bd-4a4d-8bc3-1b4caa969c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Raytracing\Header Files">
+      <UniqueIdentifier>{f0a6abd8-08a9-44c6-8749-5b166cb072db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Raytracing\Source Files">
+      <UniqueIdentifier>{58759d53-d027-4141-b797-92494f606175}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArcBall.cpp">
@@ -68,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Raytracer.cpp">
+      <Filter>Raytracing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Raytracing\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,16 +128,14 @@
     <ClInclude Include="TexturedObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Raytracer.h">
+      <Filter>Raytracing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Raytracing\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    
-    
-    
-    
-    
-    
-    
-    
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>

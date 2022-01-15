@@ -183,6 +183,8 @@
     <ClCompile Include="Homogeneous4.cpp" />
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Raytracer.cpp" />
     <ClCompile Include="RGBAImage.cpp" />
     <ClCompile Include="RGBAValue.cpp" />
     <ClCompile Include="RaytraceRenderWidget.cpp" />
@@ -200,6 +202,8 @@
     <ClInclude Include="Homogeneous4.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="Raytracer.h" />
     <ClInclude Include="RGBAImage.h" />
     <ClInclude Include="RGBAValue.h" />
     <QtMoc Include="RaytraceRenderWidget.h">
