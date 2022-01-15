@@ -2,6 +2,9 @@
 #pragma once
 #include <RGBAImage.h>
 
+// Raytrace specific
+#include "Ray.h"
+
 // Constants
 // Rendering modes
 const unsigned int RT_ORTHO = 0;
@@ -15,6 +18,9 @@ private:
 
 	// Rendering options
 	unsigned int projectionMode = RT_ORTHO;
+
+	// Internal ray tracing methods
+	Cartesian3 castRay(Ray ray);
 public:
 	// Constructor
 	Raytracer(RGBAImage* newFrameBuffer);

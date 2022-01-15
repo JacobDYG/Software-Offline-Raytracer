@@ -37,9 +37,10 @@ RaytraceRenderWidget::RaytraceRenderWidget
 	texturedObject(newTexturedObject),
 	renderParameters(newRenderParameters),
 	raytracer(&frameBuffer)
-	{ // constructor
-	// leaves nothing to put into the constructor body
-	} // constructor    
+{ // constructor
+	// Set raytrace to perspective projection
+	raytracer.setProjectionPerspective();
+} // constructor    
 
 // destructor
 RaytraceRenderWidget::~RaytraceRenderWidget()
@@ -83,22 +84,7 @@ void RaytraceRenderWidget::paintGL()
 	// routine that generates the image
 void RaytraceRenderWidget::Raytrace()
 { // RaytraceRenderWidget::Raytrace()
-	// Write gradient to image as test
-	for (size_t col = 0; col < frameBuffer.width; col++)
-	{
-		for (size_t row = 0; row < frameBuffer.height; row++)
-		{
-			auto r = double(col) / (frameBuffer.width - 1);
-			auto g = double(row) / (frameBuffer.height - 1);
-			auto b = 0.25f;
 
-			int rInt = static_cast<int>(255.999 * r);
-			int gInt = static_cast<int>(255.999 * g);
-			int bInt = static_cast<int>(255.999 * b);
-
-			frameBuffer[row][col] = RGBAValue(rInt, gInt, bInt, 1.0f);
-		}
-	}
 	//raytracer.setProjectionPerspective();
 	raytracer.raytrace();
 	
