@@ -3,7 +3,7 @@
 #include <RGBAImage.h>
 
 // Raytrace specific
-#include "Ray.h"
+#include "Geometry.h"
 
 // Constants
 // Rendering modes

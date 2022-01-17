@@ -9,7 +9,7 @@
 #include "Cartesian3.h"
 
 // RT Specific
-#include "Ray.h"
+#include "Geometry.h"
 
 // Constructor
 Raytracer::Raytracer(RGBAImage* newFrameBuffer)

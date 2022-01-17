@@ -81,10 +81,13 @@
     <ClCompile Include="Raytracer.cpp">
       <Filter>Raytracing\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ray.cpp">
+    <ClCompile Include="Geometry.cpp">
       <Filter>Raytracing\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RaytraceTexturedObject.cpp">
+      <Filter>Raytracing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Surfel.cpp">
       <Filter>Raytracing\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,10 +137,13 @@
     <ClInclude Include="Raytracer.h">
       <Filter>Raytracing\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ray.h">
+    <ClInclude Include="Geometry.h">
       <Filter>Raytracing\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RaytraceTexturedObject.h">
+      <Filter>Raytracing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Surfel.h">
       <Filter>Raytracing\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

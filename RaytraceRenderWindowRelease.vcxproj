@@ -183,7 +183,7 @@
     <ClCompile Include="Homogeneous4.cpp" />
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Quaternion.cpp" />
-    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Raytracer.cpp" />
     <ClCompile Include="RaytraceTexturedObject.cpp" />
     <ClCompile Include="RGBAImage.cpp" />
@@ -192,6 +192,7 @@
     <ClCompile Include="RenderController.cpp" />
     <ClCompile Include="RenderWidget.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
+    <ClCompile Include="Surfel.cpp" />
     <ClCompile Include="TexturedObject.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -203,7 +204,7 @@
     <ClInclude Include="Homogeneous4.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Quaternion.h" />
-    <ClInclude Include="Ray.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="Raytracer.h" />
     <ClInclude Include="RaytraceTexturedObject.h" />
     <ClInclude Include="RGBAImage.h" />
@@ -216,6 +217,7 @@
     <QtMoc Include="RenderWidget.h">
     </QtMoc>
     <ClInclude Include="RenderWindow.h" />
+    <ClInclude Include="Surfel.h" />
     <ClInclude Include="TexturedObject.h" />
   </ItemGroup>
   <ItemGroup>
