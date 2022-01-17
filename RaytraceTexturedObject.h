@@ -18,6 +18,12 @@ struct IndexedTriangularFace
 class RaytraceTexturedObject :
     public TexturedObject
 {
+private:
+    // Always stored as triangles for RT
+    std::vector<IndexedTriangularFace> triangles;
+
+    // Convert to triangles if neccasary (assuming convex polygons)
+    bool initTriangles();
 public:
     // Constructor calls base class for now
     RaytraceTexturedObject();
@@ -27,11 +33,5 @@ public:
 
     // Test ray intersection
     bool intersect(Ray ray, float& tNear, Surfel& surfelOut);
-private:
-    // Always stored as triangles for RT
-    std::vector<IndexedTriangularFace> triangles;
-
-    // Convert to triangles if neccasary (assuming convex polygons)
-    bool initTriangles();
 };
 

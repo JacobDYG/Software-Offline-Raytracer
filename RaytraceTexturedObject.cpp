@@ -20,7 +20,7 @@ bool RaytraceTexturedObject::ReadObjectStream(std::istream& geometryStream, std:
 bool RaytraceTexturedObject::intersect(Ray ray, float& tNear, Surfel& surfelOut)
 {
 	bool intersection = false;
-	for (IndexedTriangularFace& indexedTriangularFace : triangles)
+	for (auto& indexedTriangularFace : triangles)
 	{
 		// Get triangle positions to test against
 		const Cartesian3 v0Pos = vertices[indexedTriangularFace.v0];
@@ -33,7 +33,7 @@ bool RaytraceTexturedObject::intersect(Ray ray, float& tNear, Surfel& surfelOut)
 		Surfel surfel;
 
 		// Test intersection of this triangle, update values if it is closer
-		if (triangle.intersection(ray, t, surfel) && t < tNear)
+		if (triangle.intersection(ray, t) && t < tNear)
 		{
 			tNear = t;
 			surfelOut = surfel;

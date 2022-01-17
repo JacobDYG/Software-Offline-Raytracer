@@ -4,6 +4,7 @@
 
 // Raytrace specific
 #include "Geometry.h"
+#include "RaytraceTexturedObject.h"
 
 // Constants
 // Rendering modes
@@ -13,6 +14,9 @@ const unsigned int RT_PERSPECTIVE = 1;
 class Raytracer
 {
 private:
+	// Pointer to object
+	RaytraceTexturedObject* object;
+
 	// Image to render to
 	RGBAImage* frameBuffer;
 
@@ -23,7 +27,7 @@ private:
 	Cartesian3 castRay(Ray ray);
 public:
 	// Constructor
-	Raytracer(RGBAImage* newFrameBuffer);
+	Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* object);
 
 	// Main ray tracing routine
 	void raytrace();

@@ -4,6 +4,7 @@
 #include <Cartesian3.h>
 #include <Matrix4.h>
 #include <Surfel.h>
+
 class Ray
 {
 	// Minimal class for representing a ray
@@ -40,7 +41,7 @@ public:
 	void triMultMat(Matrix4 matrix);
 
 	// Test intersection with a ray
-	bool intersection(Ray ray, float& t, Surfel& surfelOut);
+	bool intersection(Ray ray, float& t);
 
 	// Getters
 	Cartesian3 getV0() const { return v0; };

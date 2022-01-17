@@ -22,7 +22,7 @@
 RaytraceRenderWidget::RaytraceRenderWidget
 		(   
 		// the geometric object to show
-		TexturedObject      *newTexturedObject,
+		RaytraceTexturedObject      *newTexturedObject,
 		// the render parameters to use
 		RenderParameters    *newRenderParameters,
 		// parent widget in visual hierarchy
@@ -35,11 +35,11 @@ RaytraceRenderWidget::RaytraceRenderWidget
 	QOpenGLWidget(parent),
 	// then store the pointers that were passed in
 	texturedObject(newTexturedObject),
-	renderParameters(newRenderParameters),
-	raytracer(&frameBuffer)
+	renderParameters(newRenderParameters)
 { // constructor
+	raytracer = new Raytracer(&frameBuffer, texturedObject);
 	// Set raytrace to perspective projection
-	//raytracer.setProjectionPerspective();
+	//raytracer->setProjectionPerspective();
 } // constructor    
 
 // destructor
@@ -85,8 +85,7 @@ void RaytraceRenderWidget::paintGL()
 void RaytraceRenderWidget::Raytrace()
 { // RaytraceRenderWidget::Raytrace()
 
-	//raytracer.setProjectionPerspective();
-	raytracer.raytrace();
+	(*raytracer).raytrace();
 	
 } // RaytraceRenderWidget::Raytrace()
 	

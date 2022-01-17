@@ -102,7 +102,7 @@ class RenderWindow : public QWidget
     RenderWindow
         (
         // the object to be rendered
-        TexturedObject          *newTexturedObject, 
+        RaytraceTexturedObject          *newTexturedObject, 
         // the model object storing render parameters
         RenderParameters        *newRenderParameters,
         // the title for the window (with default value)

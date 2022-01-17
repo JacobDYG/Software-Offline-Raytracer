@@ -12,15 +12,25 @@
 #include "Geometry.h"
 
 // Constructor
-Raytracer::Raytracer(RGBAImage* newFrameBuffer)
+Raytracer::Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* objectIn)
 {
 	// Set framebuffer pointer
 	frameBuffer = newFrameBuffer;
+	// and render obj
+	object = objectIn;
 }
 
 Cartesian3 Raytracer::castRay(Ray ray)
 {
-	// For now, return ray direction as color
+	// For now, return white if there was an intersection, otherwise return ray direction as color
+	float t = std::numeric_limits<float>::infinity();
+	Surfel surfel;
+	if (object->intersect(ray, t, surfel))
+	{
+		return Cartesian3(1.0f, 1.0f, 1.0f);
+	}
+
+	// Return direction as colour
 	Cartesian3 rayDirection(ray.getDirection());
 	Cartesian3 rayDirectionColor = (rayDirection + Cartesian3(1.0f, 1.0f, 1.0f) * 0.5f);
 	return rayDirectionColor;
@@ -58,7 +68,8 @@ void Raytracer::raytrace()
 			// Depends on projection mode ortho = true;
 			if (projectionMode == RT_ORTHO)
 			{
-				rayDirection = Cartesian3(colCamera, rowCamera, -1.0f) - Cartesian3(colCamera, rowCamera, 0.0f);
+				rayOrigin = Cartesian3(colScreen, rowScreen, 0.0f);
+				rayDirection = Cartesian3(colScreen, rowScreen, -1.0f) - Cartesian3(colScreen, rowScreen, 0.0f);
 			}
 			else
 			{
