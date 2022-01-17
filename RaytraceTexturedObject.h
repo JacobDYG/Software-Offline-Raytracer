@@ -3,9 +3,14 @@
 // WHILE THIS CLASS GUARANTEES TRIANGLES, IN ITS CURRENT STATE, THE OBJ IS NOT GUARANTEED TO BE CORRECT
 
 #pragma once
-#include "TexturedObject.h"
 
-struct TriangularFace
+// Custom classes
+#include "TexturedObject.h"
+// RT Specific
+#include "Geometry.h"
+#include "Surfel.h"
+
+struct IndexedTriangularFace
 {
     unsigned int v0, v1, v2;
 };
@@ -19,9 +24,12 @@ public:
 
     // Override reading to automatically triangulate
     bool ReadObjectStream(std::istream& geometryStream, std::istream& textureStream);
+
+    // Test ray intersection
+    bool intersect(Ray ray, float& tNear, Surfel& surfelOut);
 private:
     // Always stored as triangles for RT
-    std::vector<TriangularFace> triangles;
+    std::vector<IndexedTriangularFace> triangles;
 
     // Convert to triangles if neccasary (assuming convex polygons)
     bool initTriangles();

@@ -40,7 +40,7 @@ public:
 	void triMultMat(Matrix4 matrix);
 
 	// Test intersection with a ray
-	bool intersection(Ray ray, Surfel& surfelOut);
+	bool intersection(Ray ray, float& t, Surfel& surfelOut);
 
 	// Getters
 	Cartesian3 getV0() const { return v0; };
