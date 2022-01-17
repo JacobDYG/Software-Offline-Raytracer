@@ -84,6 +84,9 @@
     <ClCompile Include="Ray.cpp">
       <Filter>Raytracing\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RaytraceTexturedObject.cpp">
+      <Filter>Raytracing\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArcBall.h">
@@ -132,6 +135,9 @@
       <Filter>Raytracing\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ray.h">
+      <Filter>Raytracing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RaytraceTexturedObject.h">
       <Filter>Raytracing\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

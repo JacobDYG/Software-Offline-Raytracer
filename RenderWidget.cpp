@@ -208,7 +208,7 @@ void RenderWidget::paintGL()
     // tell the object to draw itself, 
     // passing in the render parameters for reference
     if (renderParameters->showObject)
-        texturedObject->Render(renderParameters);
+        texturedObject->GlRender(renderParameters);
     } // RenderWidget::paintGL()
     
 // mouse-handling

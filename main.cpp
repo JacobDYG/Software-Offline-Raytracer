@@ -27,6 +27,7 @@
 #include "TexturedObject.h"
 #include "RenderParameters.h"
 #include "RenderController.h"
+#include <RaytraceTexturedObject.h>
 
 // main routine
 int main(int argc, char **argv)
@@ -44,30 +45,30 @@ int main(int argc, char **argv)
         } // bad arg count
 
     //  use the argument to create a height field &c.
-    TexturedObject texturedObject;
+    RaytraceTexturedObject rtTexturedObject;
 
     // open the input files for the geometry & texture
     std::ifstream geometryFile(argv[1]);
     std::ifstream textureFile(argv[2]);
 
     // try reading it
-    if (!(geometryFile.good()) || !(textureFile.good()) || (!texturedObject.ReadObjectStream(geometryFile, textureFile)))
+    if (!(geometryFile.good()) || !(textureFile.good()) || (!rtTexturedObject.ReadObjectStream(geometryFile, textureFile)))
         { // object read failed 
         std::cout << "Read failed for object " << argv[1] << " or texture " << argv[2] << std::endl;
         return 0;
         } // object read failed
 
     // dump the file to out
-//      texturedObject.WriteObjectStream(std::cout, std::cout);
+//      rtTexturedObject.WriteObjectStream(std::cout, std::cout);
 
     // create some default render parameters
     RenderParameters renderParameters;
 
     // use the object & parameters to create a window
-    RenderWindow renderWindow(&texturedObject, &renderParameters, argv[1]);
+    RenderWindow renderWindow(&rtTexturedObject, &renderParameters, argv[1]);
 
     // create a controller for the window
-    RenderController renderController(&texturedObject, &renderParameters, &renderWindow);
+    RenderController renderController(&rtTexturedObject, &renderParameters, &renderWindow);
 
     //  set the initial size
     renderWindow.resize(1274, 664);

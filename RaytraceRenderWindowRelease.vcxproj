@@ -156,7 +156,7 @@
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
       <OutputFile>$(OutDir)\RaytraceRenderWindowRelease.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
     <Midl>
@@ -185,6 +185,7 @@
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Raytracer.cpp" />
+    <ClCompile Include="RaytraceTexturedObject.cpp" />
     <ClCompile Include="RGBAImage.cpp" />
     <ClCompile Include="RGBAValue.cpp" />
     <ClCompile Include="RaytraceRenderWidget.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Raytracer.h" />
+    <ClInclude Include="RaytraceTexturedObject.h" />
     <ClInclude Include="RGBAImage.h" />
     <ClInclude Include="RGBAValue.h" />
     <QtMoc Include="RaytraceRenderWidget.h">

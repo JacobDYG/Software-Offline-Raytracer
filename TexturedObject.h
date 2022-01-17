@@ -93,7 +93,7 @@ class TexturedObject
     void TransferAssetsToGPU();
     
     // routine to render
-    void Render(RenderParameters *renderParameters);
+    void GlRender(RenderParameters *renderParameters);
 
     }; // class TexturedObject
 

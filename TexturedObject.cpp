@@ -285,8 +285,8 @@ void TexturedObject::TransferAssetsToGPU()
     } // TransferAssetsToGPU()
 
 // routine to render
-void TexturedObject::Render(RenderParameters *renderParameters)
-    { // Render()
+void TexturedObject::GlRender(RenderParameters *renderParameters)
+    { // GlRender()
     // Ideally, we would apply a global transformation to the object, but sadly that breaks down
     // when we want to scale things, as unless we normalise the normal vectors, we end up affecting
     // the illumination.  Known solutions include:
@@ -425,5 +425,5 @@ void TexturedObject::Render(RenderParameters *renderParameters)
     // if we have texturing enabled, turn texturing back off 
     if (renderParameters->texturedRendering)
         glDisable(GL_TEXTURE_2D);
-    } // Render()
+    } // GlRender()
 

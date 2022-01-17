@@ -39,7 +39,7 @@ RaytraceRenderWidget::RaytraceRenderWidget
 	raytracer(&frameBuffer)
 { // constructor
 	// Set raytrace to perspective projection
-	raytracer.setProjectionPerspective();
+	//raytracer.setProjectionPerspective();
 } // constructor    
 
 // destructor
