@@ -90,6 +90,8 @@ class Matrix4
     void SetTranslation(const Cartesian3 &vector);
     void SetRotation(const Cartesian3 &axis, float theta);
     void SetScale(float xScale, float yScale, float zScale);
+
+    const static Matrix4 Identity();
     }; // Matrix4
 
 // scalar operations

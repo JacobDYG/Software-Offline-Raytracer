@@ -231,6 +231,13 @@ void Matrix4::SetScale(float xScale, float yScale, float zScale)
 
     } // SetScale()
 
+const Matrix4 Matrix4::Identity()
+{
+    Matrix4 matrix;
+    matrix.SetIdentity();
+    return matrix;
+}
+
 // scalar operations
 // additional scalar multiplication operator
 Matrix4 operator *(float factor, const Matrix4 &matrix)
