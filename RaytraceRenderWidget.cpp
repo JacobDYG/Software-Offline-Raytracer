@@ -37,7 +37,7 @@ RaytraceRenderWidget::RaytraceRenderWidget
 	texturedObject(newTexturedObject),
 	renderParameters(newRenderParameters)
 { // constructor
-	raytracer = new Raytracer(&frameBuffer, texturedObject);
+	raytracer = new Raytracer(&frameBuffer, texturedObject, renderParameters);
 	// Set raytrace to perspective projection
 	//raytracer->setProjectionPerspective();
 } // constructor    

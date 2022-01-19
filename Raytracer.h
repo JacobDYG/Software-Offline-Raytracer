@@ -16,6 +16,8 @@ class Raytracer
 private:
 	// Pointer to object
 	RaytraceTexturedObject* object;
+	// and to render params
+	RenderParameters* renderParameters;
 
 	// Image to render to
 	RGBAImage* frameBuffer;
@@ -27,7 +29,7 @@ private:
 	Cartesian3 castRay(Ray ray);
 public:
 	// Constructor
-	Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* object);
+	Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* object, RenderParameters* newRenderParameters);
 
 	// Main ray tracing routine
 	void raytrace();

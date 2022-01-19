@@ -12,12 +12,14 @@
 #include "Geometry.h"
 
 // Constructor
-Raytracer::Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* objectIn)
+Raytracer::Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* objectIn, RenderParameters* newRenderParameters)
 {
 	// Set framebuffer pointer
 	frameBuffer = newFrameBuffer;
 	// and render obj
 	object = objectIn;
+	// and params
+	renderParameters = newRenderParameters;
 }
 
 Cartesian3 Raytracer::castRay(Ray ray)
@@ -25,7 +27,7 @@ Cartesian3 Raytracer::castRay(Ray ray)
 	// For now, return white if there was an intersection, otherwise return ray direction as color
 	float t = std::numeric_limits<float>::infinity();
 	Surfel surfel;
-	if (object->intersect(ray, t, surfel))
+	if (object->intersect(ray, t, surfel, renderParameters))
 	{
 		return Cartesian3(1.0f, 1.0f, 1.0f);
 	}

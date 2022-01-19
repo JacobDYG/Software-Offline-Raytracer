@@ -6,6 +6,7 @@
 
 // Custom classes
 #include "TexturedObject.h"
+#include "Matrix4.h"
 // RT Specific
 #include "Geometry.h"
 #include "Surfel.h"
@@ -22,6 +23,9 @@ private:
     // Always stored as triangles for RT
     std::vector<IndexedTriangularFace> triangles;
 
+    // Matrix for translating this object
+    Matrix4 objectWorldMatrix;
+
     // Convert to triangles if neccasary (assuming convex polygons)
     bool initTriangles();
 public:
@@ -32,6 +36,6 @@ public:
     bool ReadObjectStream(std::istream& geometryStream, std::istream& textureStream);
 
     // Test ray intersection
-    bool intersect(Ray ray, float& tNear, Surfel& surfelOut);
+    bool intersect(Ray ray, float& tNear, Surfel& surfelOut, RenderParameters* renderParameters);
 };
 
