@@ -41,7 +41,8 @@ public:
 	void triMultMat(Matrix4 matrix);
 
 	// Test intersection with a ray
-	bool intersection(Ray ray, float& t);
+	bool geometricIntersection(Ray ray, float& tOut);
+	bool intersection(Ray ray, float& tOut, float& uOut, float& vOut);
 
 	// Getters
 	Cartesian3 getV0() const { return v0; };

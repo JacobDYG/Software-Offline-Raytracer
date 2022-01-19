@@ -18,8 +18,11 @@ Triangle::Triangle()
 Triangle::Triangle(Cartesian3 inV0, Cartesian3 inV1, Cartesian3 inV2)
 {
     v0 = inV0;
+    //v0.z = -1.0f;
     v1 = inV1;
+    //v1.z = -1.0f;
     v2 = inV2;
+    //v2.z = -1.0f;
 }
 
 void Triangle::triMultMat(Matrix4 matrix)
@@ -29,7 +32,7 @@ void Triangle::triMultMat(Matrix4 matrix)
     v2 = matrix * v2;
 }
 
-bool Triangle::intersection(Ray ray, float& t)
+bool Triangle::geometricIntersection(Ray ray, float& tOut)
 {
     // Compute the normal of the plane this triangle lies on
     Cartesian3 v0v1 = v1 - v0;
@@ -39,7 +42,7 @@ bool Triangle::intersection(Ray ray, float& t)
 
     // Check if ray and plane are parallel
     float planeNDotRayD = planeNormal.dot(ray.getDirection());
-    if (abs(planeNDotRayD) < 1e-8) return false; // 0 or very close, therefore consider parallel
+    if (fabs(planeNDotRayD) < 1e-8) return false; // 0 or very close, therefore consider parallel
 
     // Calculate D (dist from origin to plane, on a line parallel to the plane's normal)
     float planeD = planeNormal.dot(v0);
@@ -74,7 +77,41 @@ bool Triangle::intersection(Ray ray, float& t)
     if (planeNormal.dot(c) < 0) return false; // P is on the right of this edge
 
     // Update t
-    t = distT;
+    tOut = distT;
+
+    return true;
+}
+
+bool Triangle::intersection(Ray ray, float& tOut, float& uOut, float& vOut)
+{
+    // Edges as vectors
+    Cartesian3 v0v1 = v1 - v0;
+    Cartesian3 v0v2 = v2 - v0;
+
+    // Calculating determinant (scalar triple product)
+    Cartesian3 pvec = ray.getDirection().cross(v0v2);
+    float determinant = v0v1.dot(pvec);
+
+    // If determinant is 0, ray and tri are parallell
+    if (abs(determinant) < 1e-8) return false; // epsilon for numerical error
+
+    float invDet = 1.0f / determinant; // inverse determinant
+
+    Cartesian3 tVec = ray.getOrigin() - v0;
+    float u = tVec.dot(pvec) * invDet;
+    if (u < 0 || u > 1) return false;
+
+    Cartesian3 qVec = tVec.cross(v0v1);
+    float v = ray.getDirection().dot(qVec) * invDet;
+    if (v < 0 || v > 1) return false;
+
+    // Barycentric coordinates summed shouldn't exceed 1
+    if (u + v > 1) return false;
+
+    // Intersection, update values
+    tOut = v0v2.dot(qVec) * invDet;
+    uOut = u;
+    vOut = v;
 
     return true;
 }

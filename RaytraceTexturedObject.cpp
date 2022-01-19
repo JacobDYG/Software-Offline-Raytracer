@@ -52,10 +52,11 @@ bool RaytraceTexturedObject::intersect(Ray ray, float& tNear, Surfel& surfelOut,
 		
 		// Initialise closest triangle to infinity
 		float t = std::numeric_limits<float>::infinity();
+		float u, v;
 		Surfel surfel;
 
 		// Test intersection of this triangle, update values if it is closer
-		if (triangle.intersection(ray, t) && t < tNear)
+		if (triangle.intersection(ray, t, u, v) && t < tNear)
 		{
 			tNear = t;
 			surfelOut = surfel;
