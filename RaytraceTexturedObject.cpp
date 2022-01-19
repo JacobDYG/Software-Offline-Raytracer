@@ -31,22 +31,23 @@ bool RaytraceTexturedObject::intersect(Ray ray, float& tNear, Surfel& surfelOut,
 	objectWorldMatrix = objectWorldMatrix * renderParameters->rotationMatrix;
 
 	// Apply additional requested params
+	float scale = renderParameters->zoomScale;
 	if (renderParameters->scaleObject)
 	{
-		objectWorldMatrix.SetScale(renderParameters->zoomScale, renderParameters->zoomScale, renderParameters->zoomScale);
+		scale /= objectSize;
 	}
 	if (renderParameters->centreObject)
 	{
-		objectWorldMatrix.SetTranslation(Cartesian3(-centreOfGravity.x * renderParameters->zoomScale, -centreOfGravity.y * renderParameters->zoomScale, -centreOfGravity.z * renderParameters->zoomScale));
+		objectWorldMatrix = objectWorldMatrix * Matrix4::TranslationMultMat(Cartesian3(-centreOfGravity.x * scale, -centreOfGravity.y * scale, -centreOfGravity.z * scale));
 	}
 
 	bool intersection = false;
 	for (auto& indexedTriangularFace : triangles)
 	{
 		// Get triangle positions to test against
-		Homogeneous4 v0Pos = objectWorldMatrix * Homogeneous4(vertices[indexedTriangularFace.v0]);
-		Homogeneous4 v1Pos = objectWorldMatrix * Homogeneous4(vertices[indexedTriangularFace.v1]);
-		Homogeneous4 v2Pos = objectWorldMatrix * Homogeneous4(vertices[indexedTriangularFace.v2]);
+		Homogeneous4 v0Pos = objectWorldMatrix * Homogeneous4(scale * vertices[indexedTriangularFace.v0]);
+		Homogeneous4 v1Pos = objectWorldMatrix * Homogeneous4(scale * vertices[indexedTriangularFace.v1]);
+		Homogeneous4 v2Pos = objectWorldMatrix * Homogeneous4(scale * vertices[indexedTriangularFace.v2]);
 		Triangle triangle(v0Pos.Point(), v1Pos.Point(), v2Pos.Point());
 		
 		// Initialise closest triangle to infinity
