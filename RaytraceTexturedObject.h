@@ -11,9 +11,12 @@
 #include "Geometry.h"
 #include "Surfel.h"
 
+// Struct holding indices for vertices, normals and texture coords
 struct IndexedTriangularFace
 {
     unsigned int v0, v1, v2;
+    unsigned int vn0, vn1, vn2;
+    unsigned int vt0, vt1, vt2;
 };
 
 class RaytraceTexturedObject :
@@ -22,6 +25,9 @@ class RaytraceTexturedObject :
 private:
     // Always stored as triangles for RT
     std::vector<IndexedTriangularFace> triangles;
+
+    // Transformed vertices
+    std::vector<Homogeneous4> transformedVertices;
 
     // Matrix for translating this object
     Matrix4 objectWorldMatrix;
@@ -36,6 +42,8 @@ public:
     bool ReadObjectStream(std::istream& geometryStream, std::istream& textureStream);
 
     // Test ray intersection
-    bool intersect(Ray ray, float& tNear, Surfel& surfelOut, RenderParameters* renderParameters);
-};
+    bool intersect(Ray ray, float& tNear, Surfel& surfelOut);
 
+    // Updates array with transformed vertices based on current render parameters
+    void calculateTransformations(RenderParameters* renderParameters);
+};

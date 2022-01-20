@@ -27,9 +27,21 @@ Cartesian3 Raytracer::castRay(Ray ray)
 	// For now, return white if there was an intersection, otherwise return ray direction as color
 	float t = std::numeric_limits<float>::infinity();
 	Surfel surfel;
-	if (object->intersect(ray, t, surfel, renderParameters))
+	if (object->intersect(ray, t, surfel))
 	{
-		return Cartesian3(1.0f, 1.0f, 1.0f);
+		Cartesian3 color(1.0f, 1.0f, 1.0f);
+		if (renderParameters->texturedRendering)
+		{
+			// Convert to discrete texture coords
+			RGBAImage* texture = &(object->texture);
+			int texCol = std::round(surfel.u * texture->width);
+			int texRow = std::round(surfel.v * texture->height);
+			float red = (float)((*texture)[texRow][texCol]).red / 255.0f;
+			float green = (float)((*texture)[texRow][texCol]).green / 255.0f;
+			float blue = (float)((*texture)[texRow][texCol]).blue / 255.0f;
+			color = Cartesian3(red, green, blue);
+		}
+		return color;
 	}
 
 	// Return direction as colour
@@ -41,6 +53,9 @@ Cartesian3 Raytracer::castRay(Ray ray)
 // Main ray tracing routine
 void Raytracer::raytrace()
 {
+	// Calculate transformations for all objects
+	object->calculateTransformations(renderParameters);
+
 	// Cast a ray for every pixel
 	// For rows
 	for (size_t row = 0; row < (*frameBuffer).height; row++)
