@@ -13,14 +13,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -34,49 +26,63 @@
     <Filter Include="Raytracing\Source Files">
       <UniqueIdentifier>{58759d53-d027-4141-b797-92494f606175}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shared Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Shared Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Shared Header Files\Math">
+      <UniqueIdentifier>{3d60eef8-4bf7-4955-a6f3-9e2054db8d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Source Files\Math">
+      <UniqueIdentifier>{a9fab672-0afe-4692-b24a-55b6d4439744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Header Files\Utils">
+      <UniqueIdentifier>{5655390b-2edb-4684-9132-4992c8b938e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Source Files\Utils">
+      <UniqueIdentifier>{2753f580-a808-42a2-a339-5b71c3c8bb2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt">
+      <UniqueIdentifier>{0c9eaa28-d6be-48d7-9008-26b616ebccb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Rasterisation">
+      <UniqueIdentifier>{efae3901-86e9-4e25-9a1e-1319065e4fc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Shared">
+      <UniqueIdentifier>{ef8ba005-ed51-41f5-8ba1-89b7b2d9c5b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Raytracing">
+      <UniqueIdentifier>{75eb9792-334e-4115-a104-a2dd6c036997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Raytracing\Header Files">
+      <UniqueIdentifier>{19093b68-61cf-4844-be4f-3e6ef8c4004d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Raytracing\Source Files">
+      <UniqueIdentifier>{54890324-249e-4fa4-86ee-0430780cbd7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Rasterisation\Header Files">
+      <UniqueIdentifier>{f3499284-3791-44b7-83dc-a05b1448a5c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Rasterisation\Source Files">
+      <UniqueIdentifier>{5cf65f66-6594-464c-b000-960a551dd908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Shared\Header Files">
+      <UniqueIdentifier>{cd089c2a-f7ca-499c-a673-8d447540ce04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Shared\Source Files">
+      <UniqueIdentifier>{736a9e72-8492-4c84-9d49-53d857374e27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArcBall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArcBallWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cartesian3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Homogeneous4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Quaternion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RGBAImage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RGBAValue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RaytraceRenderWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TexturedObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Shared Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Shared Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Raytracer.cpp">
       <Filter>Raytracing\Source Files</Filter>
@@ -90,49 +96,52 @@
     <ClCompile Include="Surfel.cpp">
       <Filter>Raytracing\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArcBall.cpp">
+      <Filter>Shared Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Cartesian3.cpp">
+      <Filter>Shared Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Homogeneous4.cpp">
+      <Filter>Shared Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.cpp">
+      <Filter>Shared Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Shared Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBAImage.cpp">
+      <Filter>Shared Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBAValue.cpp">
+      <Filter>Shared Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="RaytraceRenderWidget.cpp">
+      <Filter>Qt\Raytracing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderWidget.cpp">
+      <Filter>Qt\Rasterisation\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcBallWidget.cpp">
+      <Filter>Qt\Shared\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderController.cpp">
+      <Filter>Qt\Shared\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderWindow.cpp">
+      <Filter>Qt\Shared\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Shared Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArcBall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <QtMoc Include="ArcBallWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClInclude Include="Cartesian3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Homogeneous4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Quaternion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RGBAImage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RGBAValue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <QtMoc Include="RaytraceRenderWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="RenderController.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClInclude Include="RenderParameters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <QtMoc Include="RenderWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClInclude Include="RenderWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Shared Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TexturedObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Shared Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Raytracer.h">
       <Filter>Raytracing\Header Files</Filter>
@@ -146,6 +155,36 @@
     <ClInclude Include="Surfel.h">
       <Filter>Raytracing\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ArcBall.h">
+      <Filter>Shared Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Cartesian3.h">
+      <Filter>Shared Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Homogeneous4.h">
+      <Filter>Shared Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>Shared Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Shared Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBAImage.h">
+      <Filter>Shared Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBAValue.h">
+      <Filter>Shared Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderWindow.h">
+      <Filter>Qt\Shared\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Shared Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Shared Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -154,5 +193,19 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="RaytraceRenderWidget.h">
+      <Filter>Qt\Raytracing\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RenderWidget.h">
+      <Filter>Qt\Rasterisation\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ArcBallWidget.h">
+      <Filter>Qt\Shared\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RenderController.h">
+      <Filter>Qt\Shared\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

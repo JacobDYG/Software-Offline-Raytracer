@@ -43,6 +43,9 @@ class RaytraceRenderWidget : public QOpenGLWidget
 	// the geometric object to be rendered
 	RaytraceTexturedObject* texturedObject;
 
+	// the lights
+	std::vector<Light*> lights;
+
 	// An image to use as a framebuffer
 	RGBAImage frameBuffer;
 

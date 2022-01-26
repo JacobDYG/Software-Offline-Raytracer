@@ -1,6 +1,11 @@
 // Class for ray trace specific state and functions
 #pragma once
+
+// Utils
 #include <RGBAImage.h>
+
+// Custom includes
+#include "Light.h"
 
 // Raytrace specific
 #include "Geometry.h"
@@ -16,6 +21,8 @@ class Raytracer
 private:
 	// Pointer to object
 	RaytraceTexturedObject* object;
+	// Pointer to list of lights
+	std::vector<Light*>* lights;
 	// and to render params
 	RenderParameters* renderParameters;
 
@@ -29,7 +36,7 @@ private:
 	Cartesian3 castRay(Ray ray);
 public:
 	// Constructor
-	Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* object, RenderParameters* newRenderParameters);
+	Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* object, std::vector<Light*>* lightsIn, RenderParameters* newRenderParameters);
 
 	// Main ray tracing routine
 	void raytrace();

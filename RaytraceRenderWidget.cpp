@@ -17,6 +17,7 @@
 
 // include the header file
 #include "RaytraceRenderWidget.h"
+#include <DirectionalLight.h>
 
 // constructor
 RaytraceRenderWidget::RaytraceRenderWidget
@@ -37,7 +38,10 @@ RaytraceRenderWidget::RaytraceRenderWidget
 	texturedObject(newTexturedObject),
 	renderParameters(newRenderParameters)
 { // constructor
-	raytracer = new Raytracer(&frameBuffer, texturedObject, renderParameters);
+	// Create the lights here. Ideally move this to some scene specification
+	DirectionalLight* directionalLight = new DirectionalLight(renderParameters->lightMatrix);
+	lights.push_back(directionalLight);
+	raytracer = new Raytracer(&frameBuffer, texturedObject, &lights, renderParameters);
 	// Set raytrace to perspective projection
 	//raytracer->setProjectionPerspective();
 } // constructor    
@@ -84,6 +88,11 @@ void RaytraceRenderWidget::paintGL()
 	// routine that generates the image
 void RaytraceRenderWidget::Raytrace()
 { // RaytraceRenderWidget::Raytrace()
+
+	// Update from light matrix
+	// Going by the convention of exactly one directional light currently
+	// Would be changed as scene is expanded to contain multiple lights
+	lights[0]->replaceLightToWorld(renderParameters->lightMatrix);
 
 	(*raytracer).raytrace();
 	

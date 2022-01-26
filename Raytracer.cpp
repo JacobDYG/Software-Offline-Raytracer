@@ -12,12 +12,13 @@
 #include "Geometry.h"
 
 // Constructor
-Raytracer::Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* objectIn, RenderParameters* newRenderParameters)
+Raytracer::Raytracer(RGBAImage* newFrameBuffer, RaytraceTexturedObject* objectIn, std::vector<Light*>* lightsIn, RenderParameters* newRenderParameters)
 {
 	// Set framebuffer pointer
 	frameBuffer = newFrameBuffer;
 	// and render obj
 	object = objectIn;
+	lights = lightsIn;
 	// and params
 	renderParameters = newRenderParameters;
 }
@@ -29,17 +30,39 @@ Cartesian3 Raytracer::castRay(Ray ray)
 	Surfel surfel;
 	if (object->intersect(ray, t, surfel))
 	{
-		Cartesian3 color(1.0f, 1.0f, 1.0f);
+		Cartesian3 color(0.0f, 0.0f, 0.0f);
+		if (renderParameters->useLighting)
+		{
+			for (auto& light : *lights)
+			{
+				// Just diffuse for now
+				// Direction returned is calculated by a subclass of light, so directional and point are handled implicitly
+				Cartesian3 lightDirection = light->getDirection(surfel);
+				Cartesian3 surfaceNormal = surfel.normal;
+				float diffuseAmount = surfaceNormal.dot(lightDirection);
+				if (diffuseAmount > 0.0f)
+				{
+					color = color + Cartesian3(renderParameters->diffuse * diffuseAmount * light->color);
+				}
+			}
+		}
 		if (renderParameters->texturedRendering)
 		{
-			// Convert to discrete texture coords
-			RGBAImage* texture = &(object->texture);
-			int texCol = std::round(surfel.u * texture->width);
-			int texRow = std::round(surfel.v * texture->height);
-			float red = (float)((*texture)[texRow][texCol]).red / 255.0f;
-			float green = (float)((*texture)[texRow][texCol]).green / 255.0f;
-			float blue = (float)((*texture)[texRow][texCol]).blue / 255.0f;
-			color = Cartesian3(red, green, blue);
+			if (renderParameters->textureModulation)
+			{
+
+			}
+			else
+			{
+				// Convert to discrete texture coords
+				RGBAImage* texture = &(object->texture);
+				int texCol = std::round(surfel.u * texture->width);
+				int texRow = std::round(surfel.v * texture->height);
+				float red = (float)((*texture)[texRow][texCol]).red / 255.0f;
+				float green = (float)((*texture)[texRow][texCol]).green / 255.0f;
+				float blue = (float)((*texture)[texRow][texCol]).blue / 255.0f;
+				color = Cartesian3(red, green, blue);
+			}
 		}
 		return color;
 	}
