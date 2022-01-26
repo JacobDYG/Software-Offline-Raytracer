@@ -136,6 +136,10 @@ RenderController::RenderController
     QObject::connect(   renderWindow->raytraceButton,               SIGNAL(clicked()),
                         this,                                       SLOT(raytraceButtonPressed()));
 
+    // gamma box
+    QObject::connect(   renderWindow->gammaCheckbox,                SIGNAL(stateChanged(int)),
+                        this,                                       SLOT(gammaCheckChanged(int)));
+
     // copy the rotation matrix from the widgets to the model
     renderParameters->rotationMatrix = renderWindow->modelRotator->RotationMatrix();
     renderParameters->lightMatrix = renderWindow->lightRotator->RotationMatrix();
@@ -464,6 +468,14 @@ void RenderController::raytraceButtonPressed()
     // Start tracing
     renderWindow->raytraceRenderWidget->invokeRt();
     // Update the interface
+    renderWindow->ResetInterface();
+}
+
+void RenderController::gammaCheckChanged(int state)
+{
+    renderParameters->gammaCorrection = (state == Qt::Checked);
+
+    // reset the interface
     renderWindow->ResetInterface();
 }
 

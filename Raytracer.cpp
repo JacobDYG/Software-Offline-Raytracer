@@ -72,9 +72,20 @@ Cartesian3 Raytracer::castRay(Ray ray)
 			RGBAImage* texture = &(object->texture);
 			int texCol = std::round(surfel.u * texture->width);
 			int texRow = std::round(surfel.v * texture->height);
-			float red = (float)((*texture)[texRow][texCol]).red / 255.0f;
-			float green = (float)((*texture)[texRow][texCol]).green / 255.0f;
-			float blue = (float)((*texture)[texRow][texCol]).blue / 255.0f;
+			float red, green, blue;
+			if (renderParameters->gammaCorrection)
+			{
+				// Images already gamma corrected, so return to linear
+				red = pow((float)((*texture)[texRow][texCol]).red / 255.0f, 2.2f);
+				green = pow((float)((*texture)[texRow][texCol]).green / 255.0f, 2.2f);
+				blue = pow((float)((*texture)[texRow][texCol]).blue / 255.0f, 2.2f);
+			}
+			else
+			{
+				red = (float)((*texture)[texRow][texCol]).red / 255.0f;
+				green = (float)((*texture)[texRow][texCol]).green / 255.0f;
+				blue = (float)((*texture)[texRow][texCol]).blue / 255.0f;
+			}
 
 			if (renderParameters->textureModulation)
 			{
@@ -144,7 +155,15 @@ void Raytracer::raytrace()
 			Ray ray(rayOrigin, rayDirection);
 			// Cast the ray
 			Cartesian3 rayDirectionColor = castRay(ray);
-			RGBAValue hitColor(rayDirectionColor.x * 255.0f, rayDirectionColor.y * 255.0f, rayDirectionColor.z * 255.0f, 1.0f);
+			RGBAValue hitColor;
+			if (renderParameters->gammaCorrection)
+			{
+				hitColor = RGBAValue(pow(rayDirectionColor.x, 1.0f / 2.2f) * 255.0f, pow(rayDirectionColor.y, 1.0f / 2.2f) * 255.0f, pow(rayDirectionColor.z, 1.0f / 2.2f) * 255.0f, 1.0f);
+			}
+			else
+			{
+				hitColor = RGBAValue(rayDirectionColor.x * 255.0f, rayDirectionColor.y * 255.0f, rayDirectionColor.z * 255.0f, 1.0f);
+			}
 			(*frameBuffer)[row][col] = hitColor;
 		}
 	}

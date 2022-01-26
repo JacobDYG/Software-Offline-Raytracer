@@ -97,6 +97,7 @@ class RenderController : public QObject
 
     // raytrace slots
     void raytraceButtonPressed();
+    void gammaCheckChanged(int state);
 
     }; // class RenderController
 

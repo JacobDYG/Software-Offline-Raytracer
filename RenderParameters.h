@@ -63,6 +63,8 @@ class RenderParameters
     bool scaleObject;
     bool mapUVWToRGB;
 
+    bool gammaCorrection;
+
     // constructor
     RenderParameters()
         :
@@ -82,7 +84,8 @@ class RenderParameters
         showObject(false),
         centreObject(false),
         scaleObject(false),
-        mapUVWToRGB(false)
+        mapUVWToRGB(false),
+        gammaCorrection(false)
         { // constructor
         
         // start the lighting at the viewer's direction

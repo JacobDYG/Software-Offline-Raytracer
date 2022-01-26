@@ -97,6 +97,7 @@ RenderWindow::RenderWindow
     // raytrace specific
     // start tracing button
     raytraceButton              = new QPushButton               ("Raytrace",            this);
+    gammaCheckbox                 = new QCheckBox                 ("Gamma Correction",    this);
     
     // add all of the widgets to the grid               Row         Column      Row Span    Column Span
     
@@ -156,6 +157,7 @@ RenderWindow::RenderWindow
     // raytrace specific
     // raytrace button
     windowLayout->addWidget(raytraceButton,             0,          6,          1,          1           );
+    windowLayout->addWidget(gammaCheckbox,                1,          6,          1,          1           );
 
     // now reset all of the control elements to match the render parameters passed in
     ResetInterface();
@@ -176,6 +178,7 @@ void RenderWindow::ResetInterface()
     showObjectBox           ->setChecked        (renderParameters   ->  showObject);
     centreObjectBox         ->setChecked        (renderParameters   ->  centreObject);
     scaleObjectBox          ->setChecked        (renderParameters   ->  scaleObject);
+    gammaCheckbox           ->setChecked        (renderParameters   ->  gammaCorrection);
     
     // set sliders
     // x & y translate are scaled to notional unit sphere in render widgets
