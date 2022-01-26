@@ -29,6 +29,7 @@ class Cartesian3
     // constructors
     Cartesian3();
     Cartesian3(float X, float Y, float Z);
+    Cartesian3(float all) : Cartesian3(all, all, all) {};
     Cartesian3(const Cartesian3 &other);
     
     // equality operator
