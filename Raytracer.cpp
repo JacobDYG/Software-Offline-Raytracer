@@ -30,19 +30,39 @@ Cartesian3 Raytracer::castRay(Ray ray)
 	Surfel surfel;
 	if (object->intersect(ray, t, surfel))
 	{
-		Cartesian3 color(0.0f, 0.0f, 0.0f);
+		Cartesian3 color(0.7f, 0.7f, 0.7f);
 		if (renderParameters->useLighting)
 		{
+			color = Cartesian3(0.0f, 0.0f, 0.0f);
 			for (auto& light : *lights)
 			{
-				// Just diffuse for now
+				// Ambient first
+				color = color + Cartesian3(renderParameters->ambient * light->color * light->intensity);
 				// Direction returned is calculated by a subclass of light, so directional and point are handled implicitly
 				Cartesian3 lightDirection = light->getDirection(surfel);
 				Cartesian3 surfaceNormal = surfel.normal;
 				float diffuseAmount = surfaceNormal.dot(lightDirection);
 				if (diffuseAmount > 0.0f)
 				{
-					color = color + Cartesian3(renderParameters->diffuse * diffuseAmount * light->color);
+					color = color + Cartesian3(renderParameters->diffuse * diffuseAmount * light->color * light->intensity);
+				}
+
+				// Finally, specular
+				// 'Camera' is at world origin
+				Cartesian3 eyeVec = Cartesian3(0.0f, 0.0f, 0.0f) - Cartesian3(0.0f, 0.0f, 0.0f);
+				Cartesian3 bisector = ((eyeVec + lightDirection) / 2.0f).unit();
+				// Calculate specular
+				// Check if the dot product is negative before raising to exponent, to avoid negatives becoming positives
+				float dotProduct = surfaceNormal.dot(bisector);
+				if (dotProduct < 0.0f)
+				{
+					dotProduct = 0.0f;
+				}
+				float specularAmount = pow(dotProduct, renderParameters->specularExponent);
+				// If there is any specular, add it to the light
+				if (specularAmount > 0.0f)
+				{
+					color = color + (Cartesian3(renderParameters->specular * light->color * light->intensity) * specularAmount);
 				}
 			}
 		}
@@ -58,7 +78,7 @@ Cartesian3 Raytracer::castRay(Ray ray)
 
 			if (renderParameters->textureModulation)
 			{
-				color = Cartesian3(red * color[0], green * color[1], red * color[2]);
+				color = Cartesian3(red * color[0], green * color[1], blue * color[2]);
 			}
 			else
 			{
