@@ -28,6 +28,7 @@ private:
 
     // Transformed vertices
     std::vector<Homogeneous4> transformedVertices;
+    std::vector<Cartesian3> transformedNormals;
 
     // Matrix for translating this object
     Matrix4 objectWorldMatrix;

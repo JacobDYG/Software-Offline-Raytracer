@@ -39,7 +39,8 @@ RaytraceRenderWidget::RaytraceRenderWidget
 	renderParameters(newRenderParameters)
 { // constructor
 	// Create the lights here. Ideally move this to some scene specification
-	DirectionalLight* directionalLight = new DirectionalLight(renderParameters->lightMatrix);
+	Cartesian3 lightColor(renderParameters->lightColor[0], renderParameters->lightColor[1], renderParameters->lightColor[2]);
+	DirectionalLight* directionalLight = new DirectionalLight(renderParameters->lightMatrix, lightColor);
 	lights.push_back(directionalLight);
 	raytracer = new Raytracer(&frameBuffer, texturedObject, &lights, renderParameters);
 	// Set raytrace to perspective projection

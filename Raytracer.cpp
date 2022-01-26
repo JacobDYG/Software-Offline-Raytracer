@@ -48,19 +48,20 @@ Cartesian3 Raytracer::castRay(Ray ray)
 		}
 		if (renderParameters->texturedRendering)
 		{
+			// Convert to discrete texture coords
+			RGBAImage* texture = &(object->texture);
+			int texCol = std::round(surfel.u * texture->width);
+			int texRow = std::round(surfel.v * texture->height);
+			float red = (float)((*texture)[texRow][texCol]).red / 255.0f;
+			float green = (float)((*texture)[texRow][texCol]).green / 255.0f;
+			float blue = (float)((*texture)[texRow][texCol]).blue / 255.0f;
+
 			if (renderParameters->textureModulation)
 			{
-
+				color = Cartesian3(red * color[0], green * color[1], red * color[2]);
 			}
 			else
 			{
-				// Convert to discrete texture coords
-				RGBAImage* texture = &(object->texture);
-				int texCol = std::round(surfel.u * texture->width);
-				int texRow = std::round(surfel.v * texture->height);
-				float red = (float)((*texture)[texRow][texCol]).red / 255.0f;
-				float green = (float)((*texture)[texRow][texCol]).green / 255.0f;
-				float blue = (float)((*texture)[texRow][texCol]).blue / 255.0f;
 				color = Cartesian3(red, green, blue);
 			}
 		}

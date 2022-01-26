@@ -14,9 +14,14 @@ bool RaytraceTexturedObject::ReadObjectStream(std::istream& geometryStream, std:
 	{
 		// Start with transformed vertices equal to vertices
 		transformedVertices.resize(vertices.size());
+		transformedNormals.resize(normals.size());
 		for (size_t i = 0; i < vertices.size(); i++)
 		{
 			transformedVertices[i] = Homogeneous4(vertices[i]);
+		}
+		for (size_t i = 0; i < normals.size(); i++)
+		{
+			transformedNormals[i] = normals[i];
 		}
 		initTriangles();
 		return true;
@@ -52,9 +57,9 @@ bool RaytraceTexturedObject::intersect(Ray ray, float& tNear, Surfel& surfelOut)
 			float gamma = v;
 			float alpha = 1.0f - beta - gamma;
 			// Interpolate normals
-			surfel.normal = alpha * normals[indexedTriangularFace.vn0] + 
-							beta * normals[indexedTriangularFace.vn1] +
-							gamma * normals[indexedTriangularFace.vn2];
+			surfel.normal = alpha * transformedNormals[indexedTriangularFace.vn0] + 
+							beta * transformedNormals[indexedTriangularFace.vn1] +
+							gamma * transformedNormals[indexedTriangularFace.vn2];
 			// Interpolate texture coord
 			surfel.u =	alpha * textureCoords[indexedTriangularFace.vt0].x +
 						beta * textureCoords[indexedTriangularFace.vt1].x +
@@ -100,6 +105,12 @@ void RaytraceTexturedObject::calculateTransformations(RenderParameters* renderPa
 	for (size_t i = 0; i < vertices.size(); i++)
 	{
 		transformedVertices[i] = transformationMat * (Homogeneous4(scale * vertices[i]));
+	}
+
+	// Transform all normals
+	for (size_t i = 0; i < normals.size(); i++)
+	{
+		transformedNormals[i] = renderParameters->rotationMatrix * normals[i];
 	}
 }
 
