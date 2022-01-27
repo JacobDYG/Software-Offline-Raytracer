@@ -42,7 +42,7 @@ bool Triangle::geometricIntersection(Ray ray, float& tOut)
 
     // Check if ray and plane are parallel
     float planeNDotRayD = planeNormal.dot(ray.getDirection());
-    if (fabs(planeNDotRayD) < 1e-8) return false; // 0 or very close, therefore consider parallel
+    if (abs(planeNDotRayD) < 1e-8) return false; // 0 or very close, therefore consider parallel
 
     // Calculate D (dist from origin to plane, on a line parallel to the plane's normal)
     float planeD = planeNormal.dot(v0);
