@@ -13,6 +13,11 @@
 
 #include "Cartesian3.h"
 #include "math.h"
+// GCC
+#ifdef __GNUC__
+#include <cmath>
+#endif
+
 #include <iomanip>
 
 // constructors

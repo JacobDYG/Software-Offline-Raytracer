@@ -1,5 +1,8 @@
 #include "RaytraceTexturedObject.h"
 
+// Standard libraries
+#include <limits>
+
 // For homogeneous coords
 #include "Homogeneous4.h"
 

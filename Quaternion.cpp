@@ -20,6 +20,11 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+// GCC
+#ifdef __GNUC__
+#include <cmath>
+#endif
+
 #include "Quaternion.h"
 
 // constructor

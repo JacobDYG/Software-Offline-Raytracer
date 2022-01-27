@@ -32,6 +32,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include <math.h>
+// GCC
+#ifdef __GNUC__
+#include <cmath>
+#endif
 
 // include the header file
 #include "RenderWidget.h"

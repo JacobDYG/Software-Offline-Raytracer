@@ -4,6 +4,11 @@
 // Standard libraries
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <limits>
+// GCC
+#ifdef __GNUC__
+#include <cmath>
+#endif
 
 // Utilities
 #include "Cartesian3.h"

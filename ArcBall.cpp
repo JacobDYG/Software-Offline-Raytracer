@@ -17,6 +17,10 @@
 
 #include "ArcBall.h"
 #include <math.h>
+// GCC
+#ifdef __GNUC__
+#include <cmath>
+#endif
 
 // constructor - initializes to a zero rotation
 ArcBall::ArcBall()
