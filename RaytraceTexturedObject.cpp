@@ -126,18 +126,21 @@ bool RaytraceTexturedObject::initTriangles()
 			// Triangulate
 			trianglesGenerated = true;
 
-			// Implement as neccasary... for now be lazy and use the first three vertices
-			IndexedTriangularFace triangle;
-			triangle.v0 = faceVertices[i][0];
-			triangle.v1 = faceVertices[i][1];
-			triangle.v2 = faceVertices[i][2];
-			triangle.vn0 = faceNormals[i][0];
-			triangle.vn1 = faceNormals[i][1];
-			triangle.vn2 = faceNormals[i][2];
-			triangle.vt0 = faceTexCoords[i][0];
-			triangle.vt1 = faceTexCoords[i][1];
-			triangle.vt2 = faceTexCoords[i][2];
-			triangles.push_back(triangle);
+			// Triangulate, only guaranteed for convex polygons
+			for (size_t j = 0; j < faceVertices[i].size() - 2; j++)
+			{
+				IndexedTriangularFace triangle;
+				triangle.v0 = faceVertices[i][0];
+				triangle.v1 = faceVertices[i][j + 1];
+				triangle.v2 = faceVertices[i][j + 2];
+				triangle.vn0 = faceNormals[i][0];
+				triangle.vn1 = faceNormals[i][j + 1];
+				triangle.vn2 = faceNormals[i][j + 2];
+				triangle.vt0 = faceTexCoords[i][0];
+				triangle.vt1 = faceTexCoords[i][j + 1];
+				triangle.vt2 = faceTexCoords[i][j + 2];
+				triangles.push_back(triangle);
+			}
 		}
 		else if (faceVertices[i].size() == 3)
 		{
