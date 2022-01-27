@@ -42,7 +42,7 @@ bool Triangle::geometricIntersection(Ray ray, float& tOut)
 
     // Check if ray and plane are parallel
     float planeNDotRayD = planeNormal.dot(ray.getDirection());
-    if (abs(planeNDotRayD) < 1e-8) return false; // 0 or very close, therefore consider parallel
+    if (std::abs(planeNDotRayD) < 1e-8) return false; // 0 or very close, therefore consider parallel
 
     // Calculate D (dist from origin to plane, on a line parallel to the plane's normal)
     float planeD = planeNormal.dot(v0);
@@ -93,7 +93,7 @@ bool Triangle::intersection(Ray ray, float& tOut, float& uOut, float& vOut)
     float determinant = v0v1.dot(pvec);
 
     // If determinant is 0, ray and tri are parallell
-    if (abs(determinant) < 1e-8) return false; // epsilon for numerical error
+    if (std::abs(determinant) < 1e-8) return false; // epsilon for numerical error
 
     float invDet = 1.0f / determinant; // inverse determinant
 
