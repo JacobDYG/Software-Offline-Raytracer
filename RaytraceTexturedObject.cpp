@@ -88,7 +88,7 @@ bool RaytraceTexturedObject::intersect(Ray ray, float& tNear)
 bool RaytraceTexturedObject::intersect(Ray ray)
 {
 	// Dummy float
-	float dummy;
+	float dummy = 0.0f;
 	return intersect(ray, dummy);
 }
 
