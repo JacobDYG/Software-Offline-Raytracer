@@ -140,6 +140,10 @@ RenderController::RenderController
     QObject::connect(   renderWindow->gammaCheckbox,                SIGNAL(stateChanged(int)),
                         this,                                       SLOT(gammaCheckChanged(int)));
 
+    // shadows box
+    QObject::connect(   renderWindow->shadowsCheckbox,              SIGNAL(stateChanged(int)),
+                        this,                                       SLOT(shadowsCheckChanged(int)));
+
     // copy the rotation matrix from the widgets to the model
     renderParameters->rotationMatrix = renderWindow->modelRotator->RotationMatrix();
     renderParameters->lightMatrix = renderWindow->lightRotator->RotationMatrix();
@@ -474,6 +478,14 @@ void RenderController::raytraceButtonPressed()
 void RenderController::gammaCheckChanged(int state)
 {
     renderParameters->gammaCorrection = (state == Qt::Checked);
+
+    // reset the interface
+    renderWindow->ResetInterface();
+}
+
+void RenderController::shadowsCheckChanged(int state)
+{
+    renderParameters->shadows = (state == Qt::Checked);
 
     // reset the interface
     renderWindow->ResetInterface();

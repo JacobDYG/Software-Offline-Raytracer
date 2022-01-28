@@ -97,6 +97,7 @@ class RenderWindow : public QWidget
     // button to start tracing
     QPushButton                 *raytraceButton;
     QCheckBox                   *gammaCheckbox;
+    QCheckBox                   *shadowsCheckbox;
 
     public:
     // constructor

@@ -20,11 +20,8 @@ Triangle::Triangle()
 Triangle::Triangle(Cartesian3 inV0, Cartesian3 inV1, Cartesian3 inV2)
 {
     v0 = inV0;
-    //v0.z = -1.0f;
     v1 = inV1;
-    //v1.z = -1.0f;
     v2 = inV2;
-    //v2.z = -1.0f;
 }
 
 void Triangle::triMultMat(Matrix4 matrix)

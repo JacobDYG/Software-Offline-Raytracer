@@ -43,31 +43,46 @@ Cartesian3 Raytracer::castRay(Ray ray)
 			{
 				// Ambient first
 				color = color + Cartesian3(renderParameters->ambient * light->color * light->intensity);
-				// Direction returned is calculated by a subclass of light, so directional and point are handled implicitly
-				Cartesian3 lightDirection = light->getDirection(surfel);
-				Cartesian3 surfaceNormal = surfel.normal;
-				float diffuseAmount = surfaceNormal.dot(lightDirection);
-				if (diffuseAmount > 0.0f)
-				{
-					color = color + Cartesian3(renderParameters->diffuse * diffuseAmount * light->color * light->intensity);
-				}
 
-				// Finally, specular
-				// 'Camera' is at world origin
-				Cartesian3 eyeVec = Cartesian3(0.0f, 0.0f, 0.0f) - Cartesian3(0.0f, 0.0f, 0.0f);
-				Cartesian3 bisector = ((eyeVec + lightDirection) / 2.0f).unit();
-				// Calculate specular
-				// Check if the dot product is negative before raising to exponent, to avoid negatives becoming positives
-				float dotProduct = surfaceNormal.dot(bisector);
-				if (dotProduct < 0.0f)
+				bool visible = true;
+				// If shadows are enabled, check for intersections towards light
+				if (renderParameters->shadows)
 				{
-					dotProduct = 0.0f;
+					Cartesian3 reverseLightDirection = (-1.0f * (light->getDirection(surfel))).unit();
+					// Directional lights only currently
+					// These don't really have a position, so there is no use in comparing the intersection distance to check behind the light source
+					Cartesian3 offsetOrigin = surfel.position + (surfel.normal * 1e-3);		// push intersection along normal by small epsilon to combat shadow acne
+					Ray reverseLightRay(offsetOrigin, reverseLightDirection);
+					visible = !object->intersect(reverseLightRay);
 				}
-				float specularAmount = pow(dotProduct, renderParameters->specularExponent);
-				// If there is any specular, add it to the light
-				if (specularAmount > 0.0f)
+				if (visible)
 				{
-					color = color + (Cartesian3(renderParameters->specular * light->color * light->intensity) * specularAmount);
+					// Direction returned is calculated by a subclass of light, so directional and point are handled implicitly
+					Cartesian3 lightDirection = light->getDirection(surfel);
+					Cartesian3 surfaceNormal = surfel.normal;
+					float diffuseAmount = surfaceNormal.dot(lightDirection);
+					if (diffuseAmount > 0.0f)
+					{
+						color = color + Cartesian3(renderParameters->diffuse * diffuseAmount * light->color * light->intensity);
+					}
+
+					// Finally, specular
+					// 'Camera' is at world origin
+					Cartesian3 eyeVec = Cartesian3(0.0f, 0.0f, 0.0f) - Cartesian3(0.0f, 0.0f, 0.0f);
+					Cartesian3 bisector = ((eyeVec + lightDirection) / 2.0f).unit();
+					// Calculate specular
+					// Check if the dot product is negative before raising to exponent, to avoid negatives becoming positives
+					float dotProduct = surfaceNormal.dot(bisector);
+					if (dotProduct < 0.0f)
+					{
+						dotProduct = 0.0f;
+					}
+					float specularAmount = pow(dotProduct, renderParameters->specularExponent);
+					// If there is any specular, add it to the light
+					if (specularAmount > 0.0f)
+					{
+						color = color + (Cartesian3(renderParameters->specular * light->color * light->intensity) * specularAmount);
+					}
 				}
 			}
 		}
@@ -135,8 +150,17 @@ void Raytracer::raytrace()
 			// Convert to camera space, accounting for aspect ratio, and field of view
 			float fovRadians = 90.0f * (M_PI / 2.0f);
 			float aspectRatio = (float)((*frameBuffer).width) / (float)((*frameBuffer).height);
-			float colCamera = colScreen * aspectRatio * tan(fovRadians / 2.0f);
-			float rowCamera = rowScreen * tan(fovRadians / 2.0f);
+			float colCamera = colScreen;
+			float rowCamera = rowScreen;
+			// Check if width of height wider
+			if (aspectRatio > 1.0f)
+			{
+				colCamera *= aspectRatio;
+			}
+			else
+			{
+				rowCamera *= 1.0f / aspectRatio;
+			}
 
 			// Calculate a ray through the image plane
 			Cartesian3 rayOrigin(0.0f, 0.0f, 0.0f);
@@ -145,8 +169,8 @@ void Raytracer::raytrace()
 			// Depends on projection mode ortho = true;
 			if (projectionMode == RT_ORTHO)
 			{
-				rayOrigin = Cartesian3(colScreen, rowScreen, 0.0f);
-				rayDirection = Cartesian3(colScreen, rowScreen, -1.0f) - Cartesian3(colScreen, rowScreen, 0.0f);
+				rayOrigin = Cartesian3(colCamera, rowCamera, 0.0f);
+				rayDirection = Cartesian3(colCamera, rowCamera, -1.0f) - Cartesian3(colCamera, rowCamera, 0.0f);
 			}
 			else
 			{

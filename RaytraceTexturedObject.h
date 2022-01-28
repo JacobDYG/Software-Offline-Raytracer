@@ -44,6 +44,10 @@ public:
 
     // Test ray intersection
     bool intersect(Ray ray, float& tNear, Surfel& surfelOut);
+    // Test intersection, but don't save surfel
+    bool intersect(Ray ray, float& tNear);
+    // Test intersection, saving nothing
+    bool intersect(Ray ray);
 
     // Updates array with transformed vertices based on current render parameters
     void calculateTransformations(RenderParameters* renderParameters);

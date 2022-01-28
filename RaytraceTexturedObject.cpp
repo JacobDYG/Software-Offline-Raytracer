@@ -78,6 +78,20 @@ bool RaytraceTexturedObject::intersect(Ray ray, float& tNear, Surfel& surfelOut)
 	return intersection;
 }
 
+bool RaytraceTexturedObject::intersect(Ray ray, float& tNear)
+{
+	// Dummy surfel
+	Surfel dummy;
+	return intersect(ray, tNear, dummy);
+}
+
+bool RaytraceTexturedObject::intersect(Ray ray)
+{
+	// Dummy float
+	float dummy;
+	return intersect(ray, dummy);
+}
+
 void RaytraceTexturedObject::calculateTransformations(RenderParameters* renderParameters)
 {
 	// Create transformation matrix
